@@ -8,7 +8,7 @@ public class Mover : MonoBehaviour {
 
 	void Start () 
 	{
-		rigidbody.velocity = transform.forward * speed;
-//		rigidbody.velocity = new Vector3 (Random.Range (-hSpeed, hSpeed), 0, speed);
+//		rigidbody.velocity = transform.forward * speed;
+		rigidbody.velocity = new Vector3 (Random.Range (-hSpeed, hSpeed), 0, speed);
 	}
 }
