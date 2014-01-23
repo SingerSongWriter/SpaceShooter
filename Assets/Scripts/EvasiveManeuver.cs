@@ -11,12 +11,13 @@ public class EvasiveManeuver : MonoBehaviour
 	public Vector2 maneuverTime;
 	public Vector2 maneuverWait;
 	
-	private float currentSpeed;
+	public float currentSpeed;
 	private float targetManeuver;
 	
 	void Start ()
 	{
-		currentSpeed = rigidbody.velocity.z;
+		if (rigidbody.velocity.z != 0)
+			currentSpeed = rigidbody.velocity.z;
 		StartCoroutine(Evade());
 	}
 	
@@ -37,12 +38,12 @@ public class EvasiveManeuver : MonoBehaviour
 		float newManeuver = Mathf.MoveTowards (rigidbody.velocity.x, targetManeuver, smoothing * Time.deltaTime);
 		rigidbody.velocity = new Vector3 (newManeuver, 0.0f, currentSpeed);
 		rigidbody.position = new Vector3
-			(
-				Mathf.Clamp(rigidbody.position.x, boundary.xMin, boundary.xMax), 
-				0.0f, 
-				Mathf.Clamp(rigidbody.position.z, boundary.zMin, boundary.zMax)
-			);
-		
+		(
+			Mathf.Clamp(rigidbody.position.x, boundary.xMin, boundary.xMax), 
+			0.0f, 
+			Mathf.Clamp(rigidbody.position.z, boundary.zMin, boundary.zMax)
+		);
+//		
 		rigidbody.rotation = Quaternion.Euler (0, 0, rigidbody.velocity.x * -tilt);
 	}
 }
