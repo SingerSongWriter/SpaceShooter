@@ -23,6 +23,9 @@ public class DestoryByContact : MonoBehaviour
 
 	void OnTriggerEnter (Collider other) 
 	{
+		if (this.tag == other.tag)
+			return;
+
 		if (other.tag == "Boundary" || other.tag == "Enemy")
 			return;
 
